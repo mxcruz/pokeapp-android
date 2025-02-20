@@ -35,7 +35,10 @@ Para correr los tests unitarios con Gradle, utiliza el siguiente comando:
 $ ./gradlew test
 ```
 
-Puedes ver el reporte de tests en `build/reports/tests/test/index.html`.
+Puedes ver el reporte de tests en `app/build/reports/tests/testDebugUnitTest/index.html`.
+```sh
+open ./app/build/reports/tests/testDebugUnitTest/index.html
+```
 
 Para generar el reporte de cobertura, utiliza el siguiente comando:
 
@@ -43,7 +46,10 @@ Para generar el reporte de cobertura, utiliza el siguiente comando:
 $ ./gradlew jacocoTestReport
 ```
 
-El reporte de cobertura estará disponible en `build/reports/jacoco/test/html/index.html`.
+El reporte de cobertura estará disponible en `app/build/reports/jacoco/jacocoTestReport/html/index.html`.
+```sh
+open ./app/build/reports/jacoco/jacocoTestReport/html/index.html 
+```
 
 ## Contribuir
 
