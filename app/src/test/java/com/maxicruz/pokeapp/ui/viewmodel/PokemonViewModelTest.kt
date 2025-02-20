@@ -44,7 +44,7 @@ class PokemonViewModelTest {
     @Test
     fun `fetchPokemonList updates live data`() = runTest {
         // Arrange
-        val mockData = listOf(Pokemon("Charmander"), Pokemon("Squirtle"))
+        val mockData = listOf(Pokemon("Charmander", ""), Pokemon("Squirtle", ""))
         coEvery { getPokemonListUseCase() } returns mockData
 
         // Act
