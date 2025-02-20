@@ -24,16 +24,26 @@ Este proyecto utiliza las siguientes dependencias:
 
 Esta guía paso a paso te indicará cómo poner en funcionamiento el entorno de desarrollo.
 
-```
+```sh
 $ git clone git@github.com:mxcruz/pokapp-android.git
 $ cd pokeapp-android
 ```
 
 Para correr los tests unitarios con Gradle, utiliza el siguiente comando:
 
-```
+```sh
 $ ./gradlew test
 ```
+
+Puedes ver el reporte de tests en `build/reports/tests/test/index.html`.
+
+Para generar el reporte de cobertura, utiliza el siguiente comando:
+
+```sh
+$ ./gradlew jacocoTestReport
+```
+
+El reporte de cobertura estará disponible en `build/reports/jacoco/test/html/index.html`.
 
 ## Contribuir
 
