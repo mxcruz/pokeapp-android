@@ -1,0 +1,7 @@
+rules:
+  - id: avoid-hardcoded-secrets
+    patterns:
+      - pattern: "password = '$SECRET'"
+    message: "Evita usar secretos hardcodeados."
+    languages: [python, kotlin, javascript]
+    severity: ERROR
