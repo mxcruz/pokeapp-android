@@ -8,5 +8,5 @@ import com.maxicruz.pokeapp.data.model.PokemonResponse
 
 interface IPokeApiService {
     @GET("pokemon")
-    suspend fun getPokemonList(@Query("limit") limit: Int = 20): Response<PokemonResponse>
+    suspend fun getPokemonList(@Query("limit") limit: Int = 151): Response<PokemonResponse>
 }

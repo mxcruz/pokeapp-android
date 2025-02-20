@@ -115,6 +115,9 @@ dependencies {
     kapt libs.hilt.compiler
     implementation libs.androidx.hilt.navigation.fragment
 
+    implementation libs.glide
+    kapt libs.compiler
+
     implementation libs.firebase.core
 
     testImplementation libs.junit
