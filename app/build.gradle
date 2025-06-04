@@ -45,13 +45,21 @@ android {
         }
     }
 
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.10"
+    }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
     }
 
     testOptions {
@@ -96,12 +104,36 @@ afterEvaluate {
 }
 
 dependencies {
+    // Jetpack Compose
+    implementation "androidx.activity:activity-compose:1.8.2"
+    implementation "androidx.compose.ui:ui:1.6.7"
+    implementation "androidx.compose.material3:material3:1.2.1"
+    implementation "androidx.compose.ui:ui-tooling-preview:1.6.7"
+    debugImplementation "androidx.compose.ui:ui-tooling:1.6.7"
+    implementation "androidx.compose.runtime:runtime-livedata:1.6.7"
+    implementation "androidx.compose.foundation:foundation:1.6.7"
+    implementation "androidx.compose.material:material:1.6.7"
+
+    // Coil for image loading in Compose
+    implementation "io.coil-kt:coil-compose:2.5.0"
+
+    // Hilt for dependency injection
+    implementation "com.google.dagger:hilt-android:2.51.1"
+    kapt "com.google.dagger:hilt-android-compiler:2.51.1"
+    implementation "androidx.hilt:hilt-navigation-compose:1.2.0"
+
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.7.0"
+
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
     implementation libs.androidx.activity
-    implementation libs.androidx.constraintlayout
-    implementation libs.androidx.recyclerview
+    // Quitar ConstraintLayout
+    // implementation libs.androidx.constraintlayout
+    // Quitar RecyclerView
+    // implementation libs.androidx.recyclerview
 
     // TypeSafe
     implementation libs.config
@@ -126,8 +158,10 @@ dependencies {
     kapt libs.hilt.compiler
     implementation libs.androidx.hilt.navigation.fragment
 
-    implementation libs.glide
-    kapt libs.compiler
+    // Quitar Glide
+    // implementation libs.glide
+    // Quitar kapt de Glide
+    // kapt libs.compiler
 
     implementation libs.firebase.core
 

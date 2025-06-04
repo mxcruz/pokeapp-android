@@ -1,7 +1,7 @@
 package com.maxicruz.pokeapp.data.repository
 
 import com.maxicruz.pokeapp.data.api.PokeApiService
-import com.maxicruz.pokeapp.data.model.Pokemon
+import com.maxicruz.pokeapp.domain.model.Pokemon
 import javax.inject.Inject
 
 class PokemonRepository @Inject constructor(

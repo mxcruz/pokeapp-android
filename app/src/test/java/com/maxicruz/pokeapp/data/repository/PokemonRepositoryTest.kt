@@ -7,7 +7,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 
 import com.maxicruz.pokeapp.data.api.PokeApiService
-import com.maxicruz.pokeapp.data.model.Pokemon
+import com.maxicruz.pokeapp.domain.model.Pokemon
 
 import org.junit.Before
 import org.junit.Test

@@ -1,4 +1,4 @@
-package com.maxicruz.pokeapp.data.model
+package com.maxicruz.pokeapp.domain.model
 
 data class Pokemon(
     val name: String,
