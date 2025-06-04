@@ -10,13 +10,16 @@ import androidx.compose.ui.unit.dp
 import com.maxicruz.pokeapp.domain.model.Pokemon
 
 @Composable
-fun PokemonList(pokemonList: List<Pokemon>) {
+fun PokemonList(
+    pokemonList: List<Pokemon>,
+    onItemClick: (Pokemon) -> Unit
+) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(8.dp)
     ) {
         items(pokemonList) { pokemon ->
-            PokemonItem(pokemon)
+            PokemonItem(pokemon = pokemon, onClick = onItemClick)
         }
     }
 }

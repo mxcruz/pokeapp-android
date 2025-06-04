@@ -1,6 +1,7 @@
 package com.maxicruz.pokeapp.presentation.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,10 +18,14 @@ import coil.compose.rememberAsyncImagePainter
 import com.maxicruz.pokeapp.domain.model.Pokemon
 
 @Composable
-fun PokemonItem(pokemon: Pokemon) {
+fun PokemonItem(
+    pokemon: Pokemon,
+    onClick: (Pokemon) -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable { onClick(pokemon) }
             .padding(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
