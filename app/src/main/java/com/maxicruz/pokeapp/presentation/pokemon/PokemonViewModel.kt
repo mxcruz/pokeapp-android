@@ -1,4 +1,4 @@
-package com.maxicruz.pokeapp.ui.viewmodel
+package com.maxicruz.pokeapp.presentation.pokemon
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

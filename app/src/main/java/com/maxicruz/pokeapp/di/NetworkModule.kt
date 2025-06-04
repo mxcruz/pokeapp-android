@@ -1,5 +1,6 @@
-package com.maxicruz.pokeapp.data.api
+package com.maxicruz.pokeapp.di
 
+import com.maxicruz.pokeapp.data.api.IPokeApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

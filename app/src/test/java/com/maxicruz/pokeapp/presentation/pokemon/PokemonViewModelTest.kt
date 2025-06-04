@@ -1,4 +1,4 @@
-package com.maxicruz.pokeapp.ui.viewmodel
+package com.maxicruz.pokeapp.presentation.pokemon
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.maxicruz.pokeapp.domain.model.Pokemon
