@@ -22,6 +22,7 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.background
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 
@@ -34,7 +35,15 @@ fun PokemonScreen(
     var selectedPokemon by remember { mutableStateOf<Pokemon?>(null) }
 
     when (getPokemonState) {
-        is GetPokemonState.Loading -> CircularProgressIndicator()
+        is GetPokemonState.Loading ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
 
         is GetPokemonState.Error -> {
             errorMessage = getPokemonState.message
