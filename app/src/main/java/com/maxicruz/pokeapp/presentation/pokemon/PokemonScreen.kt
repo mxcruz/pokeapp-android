@@ -21,8 +21,12 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TextField
+import androidx.compose.ui.res.painterResource
+import com.maxicruz.pokeapp.R
 import com.maxicruz.pokeapp.presentation.components.LoadingPanel
 
 @Composable
@@ -32,6 +36,16 @@ fun PokemonScreen(
     val getPokemonState = viewModel.getPokemonState
     var errorMessage by remember { mutableStateOf<String?>(null) }
     var selectedPokemon by remember { mutableStateOf<Pokemon?>(null) }
+    var filterText by remember { mutableStateOf("") }
+
+    // Filtra la lista de pokémon por nombre
+    val filteredPokemons = remember(getPokemonState, filterText) {
+        if (getPokemonState is GetPokemonState.Success) {
+            getPokemonState.pokemons.filter { it.name.contains(filterText, ignoreCase = true) }
+        } else {
+            emptyList()
+        }
+    }
 
     when (getPokemonState) {
         is GetPokemonState.Loading -> LoadingPanel()
@@ -49,11 +63,28 @@ fun PokemonScreen(
         is GetPokemonState.Success -> {
             Scaffold (
                 topBar = {
-                    Text(
-                        text = "Lista de Pokémon",
-                        style = MaterialTheme.typography.headlineMedium,
-                        modifier = Modifier.padding(20.dp, top = 60.dp, bottom = 8.dp)
-                    )
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 40.dp, start = 20.dp, end = 20.dp, bottom = 4.dp)
+                    ) {
+                        Row (
+                            horizontalArrangement = Arrangement.Center,
+                            modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.logo),
+                                contentDescription = "Logo",
+                                modifier = Modifier.size(100.dp)
+                            )
+                        }
+                        TextField(
+                            value = filterText,
+                            onValueChange = { filterText = it },
+                            label = { Text("Buscar por nombre") },
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
                 }
             ) { paddingValues ->
                 Box(
@@ -66,7 +97,7 @@ fun PokemonScreen(
                     ) { pokemon ->
                         if (pokemon == null) {
                             PokemonList(
-                                pokemonList = getPokemonState.pokemons,
+                                pokemonList = filteredPokemons,
                                 onItemClick = { selectedPokemon = it }
                             )
                         } else {
