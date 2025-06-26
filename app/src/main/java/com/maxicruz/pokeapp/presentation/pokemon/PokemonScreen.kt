@@ -63,26 +63,15 @@ fun PokemonScreen(
         is GetPokemonState.Success -> {
             Scaffold (
                 topBar = {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 40.dp, start = 20.dp, end = 20.dp, bottom = 4.dp)
+                    Row (
+                        horizontalArrangement = Arrangement.Center,
+                        modifier = Modifier.fillMaxWidth()
+                            .padding(top = 40.dp),
                     ) {
-                        Row (
-                            horizontalArrangement = Arrangement.Center,
-                            modifier = Modifier.fillMaxWidth(),
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.logo),
-                                contentDescription = "Logo",
-                                modifier = Modifier.size(100.dp)
-                            )
-                        }
-                        TextField(
-                            value = filterText,
-                            onValueChange = { filterText = it },
-                            label = { Text("Buscar por nombre") },
-                            modifier = Modifier.fillMaxWidth()
+                        Image(
+                            painter = painterResource(id = R.drawable.logo),
+                            contentDescription = "Logo",
+                            modifier = Modifier.size(80.dp)
                         )
                     }
                 }
@@ -96,10 +85,22 @@ fun PokemonScreen(
                         transitionSpec = { fadeIn() togetherWith fadeOut() }
                     ) { pokemon ->
                         if (pokemon == null) {
-                            PokemonList(
-                                pokemonList = filteredPokemons,
-                                onItemClick = { selectedPokemon = it }
-                            )
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 20.dp)
+                            ) {
+                                TextField(
+                                    value = filterText,
+                                    onValueChange = { filterText = it },
+                                    label = { Text("Buscar por nombre") },
+                                    modifier = Modifier.fillMaxWidth()
+                                )
+                                PokemonList(
+                                    pokemonList = filteredPokemons,
+                                    onItemClick = { selectedPokemon = it }
+                                )
+                            }
                         } else {
                             Column(
                                 modifier = Modifier
