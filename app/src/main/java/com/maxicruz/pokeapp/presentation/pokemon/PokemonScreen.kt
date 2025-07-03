@@ -10,27 +10,23 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.rememberAsyncImagePainter
 import com.maxicruz.pokeapp.domain.model.Pokemon
 import com.maxicruz.pokeapp.presentation.components.PokemonList
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TextField
 import androidx.compose.ui.res.painterResource
 import com.maxicruz.pokeapp.R
 import com.maxicruz.pokeapp.presentation.components.LoadingPanel
+import androidx.navigation.NavController
+import com.maxicruz.pokeapp.presentation.navigation.Screen
 
 @Composable
 fun PokemonScreen(
+    navController: NavController,
     viewModel: PokemonViewModel = hiltViewModel(),
 ) {
     val getPokemonState = viewModel.getPokemonState
@@ -80,57 +76,27 @@ fun PokemonScreen(
                     modifier = Modifier.fillMaxSize()
                         .padding(paddingValues)
                 ) {
-                    AnimatedContent(
-                        targetState = selectedPokemon,
-                        transitionSpec = { fadeIn() togetherWith fadeOut() }
-                    ) { pokemon ->
-                        if (pokemon == null) {
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 20.dp)
-                            ) {
-                                TextField(
-                                    value = filterText,
-                                    onValueChange = { filterText = it },
-                                    label = { Text("Buscar por nombre") },
-                                    modifier = Modifier.fillMaxWidth()
-                                )
-                                PokemonList(
-                                    pokemonList = filteredPokemons,
-                                    onItemClick = { selectedPokemon = it }
-                                )
-                            }
-                        } else {
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .padding(32.dp),
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.Center
-                            ) {
-                                Image(
-                                    painter = rememberAsyncImagePainter(pokemon.imageUrl),
-                                    contentDescription = "Imagen grande del Pokémon",
-                                    modifier = Modifier.size(200.dp)
-                                )
-                                Spacer(modifier = Modifier.height(24.dp))
-                                Text(
-                                    text = pokemon.name,
-                                    style = MaterialTheme.typography.headlineMedium
-                                )
-                                Spacer(modifier = Modifier.height(8.dp))
-                                Text(
-                                    text = "ID: ${pokemon.id}",
-                                    style = MaterialTheme.typography.bodyLarge
-                                )
-                                // Agrega aquí más detalles si tu modelo tiene más campos
-                                Spacer(modifier = Modifier.height(32.dp))
-                                Button(onClick = { selectedPokemon = null }) {
-                                    Text("Volver")
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp)
+                    ) {
+                        TextField(
+                            value = filterText,
+                            onValueChange = { filterText = it },
+                            label = { Text("Buscar por nombre") },
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                        PokemonList(
+                            pokemonList = filteredPokemons,
+                            onItemClick = {
+                                navController.navigate("pokemon/${it.id}") {
+                                    popUpTo(Screen.Pokemon.route) { inclusive = true }
+                                    launchSingleTop = true
+                                    restoreState = true
                                 }
                             }
-                        }
+                        )
                     }
                 }
             }
