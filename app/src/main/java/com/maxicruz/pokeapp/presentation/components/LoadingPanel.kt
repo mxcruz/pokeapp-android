@@ -38,7 +38,7 @@ fun LoadingPanel() {
             painter = painterResource(id = R.drawable.pokeball),
             contentDescription = "Logo",
             modifier = Modifier
-                .fillMaxSize(0.2f)
+                .fillMaxSize(0.15f)
                 .rotate(rotation)
         )
     }
